@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    >
+
+    <LinearLayout
+        android:id="@+id/tabLayout"
+        style="?android:attr/buttonBarStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#95CBE9"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <Button
+            android:id="@+id/timetableButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_selector"
+            android:enabled="false"
+            android:onClick="timetableTabClick"
+            android:text="@string/timetables"
+            android:textColor="@drawable/button_text_color"
+            android:textSize="12sp"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/mapButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_selector"
+            android:onClick="mapTabClick"
+            android:text="@string/map"
+            android:textColor="@drawable/button_text_color"
+            android:textSize="12sp"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/favouriteButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/button_background_selector"
+            android:onClick="favouritesTabClick"
+            android:text="Favourites"
+            android:textColor="@drawable/button_text_color"
+            android:textSize="12sp"
+            app:backgroundTint="@null" />
+
+    </LinearLayout>
+
+    <fragment
+        android:id="@+id/fragment"
+        android:name="com.example.merseytrainslive.JourneySearchFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

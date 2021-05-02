@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".JourneySearchFragment"
+    >
+
+    <TextView
+        android:id="@+id/station1SearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/rounded_black_border"
+        android:text="🔎 From"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/station2SearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:background="@drawable/rounded_black_border"
+        android:text="🔎 To"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/station1SearchView" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/station2SearchView">
+
+        <LinearLayout
+            android:id="@+id/timeTabLayout"
+            style="?android:attr/buttonBarStyle"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.5"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/departingButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_background_selector"
+                android:text="Departing At"
+                android:textColor="@drawable/button_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@null" />
+
+            <Button
+                android:id="@+id/arrivingButton"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/button_background_selector"
+                android:enabled="false"
+                android:text="Arriving By"
+                android:textColor="@drawable/button_text_color"
+                android:textSize="12sp"
+                app:backgroundTint="@null" />
+
+        </LinearLayout>
+
+        <TimePicker
+            android:id="@+id/journeyTimePicker"
+            android:layout_width="222dp"
+            android:layout_height="150dp"
+            android:timePickerMode="spinner" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
