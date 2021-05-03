@@ -1,3 +1,5 @@
+package com.example.merseytrainslive.livedata;
+
 public class Station {
     private String stationName;
     private String stanox;

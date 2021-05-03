@@ -19,6 +19,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -30,6 +31,7 @@ public class JourneySearchFragment extends Fragment {
     Button arrivingButton;
     Dialog dialog;
     List<String> stations;
+    Button favouriteButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -47,6 +49,16 @@ public class JourneySearchFragment extends Fragment {
         arrivingButton = view.findViewById(R.id.arrivingButton);
         station1Search = view.findViewById(R.id.station1SearchView);
         station2Search = view.findViewById(R.id.station2SearchView);
+        favouriteButton = view.findViewById(R.id.favouriteButton);
+
+        favouriteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ArrayList<Favourite> favourites = PrefConfig.readListFromPref(getActivity().getApplicationContext());
+                favourites.add(new Favourite(R.drawable.ic_baseline_star, station1Search.getText().toString(), station2Search.getText().toString()));
+                PrefConfig.writeListInPref(getActivity().getApplicationContext(), favourites);
+            }
+        });
 
         departingButton.setOnClickListener(new View.OnClickListener() {
             @Override

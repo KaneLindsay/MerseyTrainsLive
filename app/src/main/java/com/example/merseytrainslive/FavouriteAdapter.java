@@ -45,9 +45,7 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.Favo
                    }
                }
             });
-
         }
-
     }
 
     public FavouriteAdapter(ArrayList<Favourite> favouriteList) {

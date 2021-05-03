@@ -1,3 +1,5 @@
+package com.example.merseytrainslive.livedata;
+
 public class Service {
     private String serviceCode;
     private String trainID;

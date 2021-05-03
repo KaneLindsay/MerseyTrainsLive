@@ -9,12 +9,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import java.util.ArrayList;
 
 public class FavouritesFragment extends Fragment {
 
-    ArrayList<Favourite> favourites = new ArrayList<>();
+    ArrayList<Favourite> favourites = PrefConfig.readListFromPref(getActivity().getApplicationContext());
     FavouriteAdapter adapter = new FavouriteAdapter(favourites);
 
     @Override
@@ -33,25 +34,20 @@ public class FavouritesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
 
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setAdapter(adapter);
+
         adapter.setOnItemClickListener(new FavouriteAdapter.OnItemClickListener() {
             @Override
             public void onDeleteClick(int position) {
                 removeItem(position);
             }
         });
-
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setAdapter(adapter);
-
-    }
-
-    public void addItem(String station1, String station2) {
-        favourites.add(new Favourite(R.drawable.ic_baseline_star, station1, station2));
-        adapter.notifyItemInserted(favourites.size());
     }
 
     public void removeItem(int position) {
         favourites.remove(position);
         adapter.notifyItemRemoved(position);
+        PrefConfig.writeListInPref(getActivity().getApplicationContext(), favourites);
     }
 }

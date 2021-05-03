@@ -1,3 +1,5 @@
+package com.example.merseytrainslive.livedata;
+
 import org.json.*;
 
 import java.io.File;
@@ -5,13 +7,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Scanner;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.zip.GZIPInputStream;
 import java.net.URL;
-import org.json.*;
 import java.util.Vector;
 import org.apache.commons.io.FileUtils;
 
@@ -39,7 +39,7 @@ public class ScheduleManager {
     }
 
     public void initializeStations() {
-        //stations.add(new Station("name", "stanox", platforms, "tiploc"));
+        //stations.add(new com.example.merseytrainslive.livedata.Station("name", "stanox", platforms, "tiploc"));
     }
 
     public static void readJSONFile(Path fileLocation) {
@@ -98,7 +98,7 @@ public class ScheduleManager {
 
             }
             //JSONObject o = new JSONObject(fis.toString());
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             System.err.printf("IOException : %s", e);
         }
     }

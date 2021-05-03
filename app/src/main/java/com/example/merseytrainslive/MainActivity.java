@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
     TextView station1Search;
     TextView station2Search;
-    String stringy = "hello";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
