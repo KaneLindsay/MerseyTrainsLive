@@ -31,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     TextView station2Search;
     JourneySearchFragment journeySearchFragment = new JourneySearchFragment();
     FavouritesFragment favouritesFragment = new FavouritesFragment();
+    MapsActivity mapsActivity = new MapsActivity();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
         v.setEnabled(false);
         b.setEnabled(true);
         c.setEnabled(true);
+        changeFragment(mapsActivity);
     }
 
     public void favouritesTabClick(View v) {
