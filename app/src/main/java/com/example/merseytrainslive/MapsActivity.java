@@ -143,11 +143,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //polyline1.setColor(111);
             }
         });
-
     }
-
-
-
 
 
     //create overlay from svg image to bitmap image
