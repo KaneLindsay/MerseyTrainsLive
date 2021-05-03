@@ -1,6 +1,6 @@
 package com.example.merseytrainslive.livedata;
 
-import org.json.JSONObject;
+import org.json.*;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -118,7 +118,7 @@ public class ScheduleManager {
             Connection con = DriverManager.getConnection(url, uname, password);
 
             for (int i = 0; i < locationVector.size(); i++){
-                PreparedStatement schedule_update = con.prepareStatement("INSERT INTO Train_Schedule (train_uid, tiploc, arrival, departure) VALUES("+locationVector[i][0]+","+locationVector[i][1]+","+locationVector[i][2]+","+locationVector[i][3]+")");
+                PreparedStatement schedule_update = con.prepareStatement("INSERT INTO Train_Schedule (train_uid, tiploc, arrival, departure) VALUES("+locationVector.get(i)[0]+","+locationVector.get(i)[1]+","+locationVector.get(i)[2]+","+locationVector.get(i)[3]+")");
                 schedule_update.executeUpdate();
 
             }

@@ -23,6 +23,8 @@ public class Service {
         }  else {// if (movementMessage[2] == "DEPARTURE")
             atStation = false;
         }
+
+        //ScheduleManager.addDelay(trainID, delay);
     }
 
     //Find station linked to STANOX, place train in the station or between this and the next station, depending on atStation
