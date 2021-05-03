@@ -54,9 +54,12 @@ public class JourneySearchFragment extends Fragment {
         favouriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList<Favourite> favourites = PrefConfig.readListFromPref(getActivity().getApplicationContext());
-                favourites.add(new Favourite(R.drawable.ic_baseline_star, station1Search.getText().toString(), station2Search.getText().toString()));
-                PrefConfig.writeListInPref(getActivity().getApplicationContext(), favourites);
+                ArrayList<Favourite> favourites = PrefConfig.readListFromPref(getActivity());
+                if (favourites == null) {
+                    favourites = new ArrayList<>();
+                }
+                favourites.add(new Favourite(R.drawable.ic_baseline_stars_24, station1Search.getText().toString(), station2Search.getText().toString()));
+                PrefConfig.writeListInPref(getActivity(), favourites);
             }
         });
 

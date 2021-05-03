@@ -15,8 +15,8 @@ import java.util.ArrayList;
 
 public class FavouritesFragment extends Fragment {
 
-    ArrayList<Favourite> favourites = PrefConfig.readListFromPref(getActivity().getApplicationContext());
-    FavouriteAdapter adapter = new FavouriteAdapter(favourites);
+    ArrayList<Favourite> favourites;
+    FavouriteAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -34,7 +34,13 @@ public class FavouritesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
 
+        favourites = PrefConfig.readListFromPref(getActivity().getApplicationContext());
+        if (favourites == null) {
+            favourites = new ArrayList<>();
+        }
+
         recyclerView.setLayoutManager(layoutManager);
+        adapter = new FavouriteAdapter(favourites);
         recyclerView.setAdapter(adapter);
 
         adapter.setOnItemClickListener(new FavouriteAdapter.OnItemClickListener() {
