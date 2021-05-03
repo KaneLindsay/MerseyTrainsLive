@@ -29,7 +29,7 @@ android {
 }
 
 dependencies {
-    implementation 'commons-io:commons-io:2.6'
+    implementation 'commons-io:commons-io:20030203.000550'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'com.google.android.material:material:1.3.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
@@ -37,9 +37,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.3.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
-    implementation 'org.java-websocket:Java-WebSocket:1.3.0'
+    implementation 'org.java-websocket:Java-WebSocket:1.5.1'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation files('C:\\Users\\kanel\\AndroidStudioProjects\\MerseyTrainsLive\\Gozirra\\gozirra-robomq.jar')
+    implementation files('C:/Users/kanel/AndroidStudioProjects/MerseyTrainsLive/Gozirra/Gozirra/gozirra-robomq.jar')
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'

@@ -2,7 +2,9 @@ package com.example.merseytrainslive;
 
 import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -15,6 +17,9 @@ import android.media.Image;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -41,34 +46,39 @@ import com.google.android.gms.maps.model.UrlTileProvider;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MapsFragment extends Fragment implements OnMapReadyCallback {
 
-    private GoogleMap mMap;
+    public MapsFragment() {
+
+    }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        return inflater.inflate(R.layout.activity_maps, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        FragmentManager fm = getChildFragmentManager();
+        SupportMapFragment mapFragment = (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            fm.beginTransaction().replace(R.id.map, mapFragment).commit();
+        }
         mapFragment.getMapAsync(this);  //starts map download - asynchronous
+
+
+
     }
 
     /**
      * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
      */
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onMapReady(GoogleMap googleMap) {   //handle markers on map in here
-
-        mMap = googleMap;
 
         //###################################################################################
         //edit bound_image stuff + the stuff in .position to size the image to fit the screen
@@ -93,12 +103,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //restrict zoom bounds + pan bounds
-        mMap.setLatLngBoundsForCameraTarget(RESTRICTED_BOUNDS_AREA); //set bounds for pan
-        mMap.setMinZoomPreference(9.5f); // Set a preference for minimum zoom (Zoom out).
-        mMap.setMaxZoomPreference(13.0f); // Set a preference for maximum zoom (Zoom In).
+        googleMap.setLatLngBoundsForCameraTarget(RESTRICTED_BOUNDS_AREA); //set bounds for pan
+        googleMap.setMinZoomPreference(9.5f); // Set a preference for minimum zoom (Zoom out).
+        googleMap.setMaxZoomPreference(13.0f); // Set a preference for maximum zoom (Zoom In).
 
         final LatLng kirkdale = new LatLng(56.66055, -23.048887);
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(kirkdale));
+        googleMap.moveCamera(CameraUpdateFactory.newLatLng(kirkdale));
 
         // ###################################################################################
         // ###################################################################################
@@ -106,10 +116,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         //put overlay on map - can edit size
         GroundOverlayOptions image = new GroundOverlayOptions()
-                .image(bitmapDescriptorFromVector(getApplicationContext(), R.drawable.ic_transparent_bg))
+                .image(bitmapDescriptorFromVector(getContext(), R.drawable.ic_transparent_bg))
                 .position(BOUND_IMAGE_NW, 50000f, 70000f);
                 //.positionFromBounds(IMAGE_BOUNDS_AREA);
-        mMap.addGroundOverlay(image);
+        googleMap.addGroundOverlay(image);
 
 
 
@@ -118,8 +128,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
         //calls controller to put all markers down
-        Context context = getApplicationContext();
-        MapMarkerController mapMarkers = new MapMarkerController(mMap, context, googleMap);
+        Context context = getContext();
+        MapMarkerController mapMarkers = new MapMarkerController(googleMap, context, googleMap);
 
         //station.setVisible(false);
 
@@ -143,11 +153,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 //polyline1.setColor(111);
             }
         });
-
     }
-
-
-
 
 
     //create overlay from svg image to bitmap image
