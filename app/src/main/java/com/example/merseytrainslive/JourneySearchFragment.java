@@ -167,9 +167,4 @@ public class JourneySearchFragment extends Fragment {
             }
         });
     }
-
-    public String[] routeFinder(String startStation, String endStation) {
-        String[] transferStations;
-        return new String[]{"test"};
-    }
 }

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import java.util.ArrayList;
 
@@ -34,7 +33,7 @@ public class FavouritesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
 
-        favourites = PrefConfig.readListFromPref(getActivity().getApplicationContext());
+        favourites = PrefConfig.readListFromPref(getActivity());
         if (favourites == null) {
             favourites = new ArrayList<>();
         }
@@ -54,6 +53,6 @@ public class FavouritesFragment extends Fragment {
     public void removeItem(int position) {
         favourites.remove(position);
         adapter.notifyItemRemoved(position);
-        PrefConfig.writeListInPref(getActivity().getApplicationContext(), favourites);
+        PrefConfig.writeListInPref(getActivity(), favourites);
     }
 }

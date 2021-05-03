@@ -18,6 +18,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -28,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
     TextView station1Search;
     TextView station2Search;
+    JourneySearchFragment journeySearchFragment = new JourneySearchFragment();
+    FavouritesFragment favouritesFragment = new FavouritesFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +49,7 @@ public class MainActivity extends AppCompatActivity {
         v.setEnabled(false);
         c.setEnabled(true);
         b.setEnabled(true);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        JourneySearchFragment journeySearchFragment = new JourneySearchFragment();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fragment, journeySearchFragment, null)
-                .setReorderingAllowed(true)
-                .addToBackStack("name2") // name can be null
-                .commit();
+        changeFragment(journeySearchFragment);
     }
 
     public void mapTabClick(View v) {
@@ -69,12 +66,14 @@ public class MainActivity extends AppCompatActivity {
         v.setEnabled(false);
         b.setEnabled(true);
         c.setEnabled(true);
+        changeFragment(favouritesFragment);
+    }
+
+    private void changeFragment(Fragment fr){
         FragmentManager fragmentManager = getSupportFragmentManager();
-        FavouritesFragment favouritesFragment = new FavouritesFragment();
         fragmentManager.beginTransaction()
-                .replace(R.id.fragment, favouritesFragment, null)
+                .replace(R.id.fragment, fr, null)
                 .setReorderingAllowed(true)
-                .addToBackStack("name") // name can be null
                 .commit();
     }
 
