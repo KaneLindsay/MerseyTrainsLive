@@ -14,6 +14,9 @@ import java.util.ArrayList;
 
 public class FavouritesFragment extends Fragment {
 
+    ArrayList<Favourite> favourites = new ArrayList<>();
+    FavouriteAdapter adapter = new FavouriteAdapter(favourites);
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -24,21 +27,31 @@ public class FavouritesFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         RecyclerView recyclerView;
-        RecyclerView.Adapter adapter;
         RecyclerView.LayoutManager layoutManager;
         // Setup any handles to view objects here
-        ArrayList<Favourite> favourites = new ArrayList<>();
-
-        favourites.add(new Favourite(R.drawable.ic_baseline_star, "Hunts Cross", "Southport"));
-        favourites.add(new Favourite(R.drawable.ic_baseline_star, "Liverpool Central", "Ormskirk"));
-        favourites.add(new Favourite(R.drawable.ic_baseline_star, "Liverpool Central", "Kirkby"));
-
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-        adapter = new FavouriteAdapter(favourites);
+
+        adapter.setOnItemClickListener(new FavouriteAdapter.OnItemClickListener() {
+            @Override
+            public void onDeleteClick(int position) {
+                removeItem(position);
+            }
+        });
 
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
+
+    }
+
+    public void addItem(String station1, String station2) {
+        favourites.add(new Favourite(R.drawable.ic_baseline_star, station1, station2));
+        adapter.notifyItemInserted(favourites.size());
+    }
+
+    public void removeItem(int position) {
+        favourites.remove(position);
+        adapter.notifyItemRemoved(position);
     }
 }
