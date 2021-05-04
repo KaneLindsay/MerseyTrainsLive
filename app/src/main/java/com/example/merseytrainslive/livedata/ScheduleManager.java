@@ -1,10 +1,13 @@
 package com.example.merseytrainslive.livedata;
 
 import org.json.*;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.Scanner;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -80,10 +83,7 @@ public class ScheduleManager {
                         locationVector.add(locationInfo);   //locationVector stores all arrays of location infos
                     }
 
-                    //locationVector needs to be searched through, adding times of arrival and departure to the station's column (idk how you're doing it)
-                    //Format for locationVector is: [[train_uid, tiploc_code, public_arrival, public departure], [etc..]]
-                    //For origin stations public_arrival is null, for termination stations public_departure is null.
-                    //System.out.println("o");
+                    addToDatabase(locationVector);
 
                     for (int i = 0; i < locationVector.size(); i++) {   //Prints the shit
                         for (int j = 0; j < locationVector.get(i).length; j++) {
@@ -100,6 +100,31 @@ public class ScheduleManager {
             //JSONObject o = new JSONObject(fis.toString());
         } catch (IOException | JSONException e) {
             System.err.printf("IOException : %s", e);
+        }
+    }
+
+    private static void addToDatabase(Vector<String[]> locationVector) {
+        String url= "jdbc:mysql://localhost:3306/Train_Schedule";
+        String uname = "james";
+        String password = "Uqj3wg75o34";
+
+        try{
+            Class.forName("com.mysql.cj.jdbc.Driver");
+
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        try{
+            Connection con = DriverManager.getConnection(url, uname, password);
+
+            for (int i = 0; i < locationVector.size(); i++){
+                PreparedStatement schedule_update = con.prepareStatement("INSERT INTO Train_Schedule (train_uid, tiploc, arrival, departure) VALUES("+locationVector.get(i)[0]+","+locationVector.get(i)[1]+","+locationVector.get(i)[2]+","+locationVector.get(i)[3]+")");
+                schedule_update.executeUpdate();
+
+            }
+        }
+        catch (SQLException e){
+            e.printStackTrace();
         }
     }
 
