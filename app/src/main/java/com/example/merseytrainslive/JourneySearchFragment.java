@@ -31,11 +31,12 @@ public class JourneySearchFragment extends Fragment {
     TextView station2Search;
     Button departingButton;
     Button arrivingButton;
+    Button searchButton;
     Dialog dialog;
     List<String> stationNames;
-    ArrayList<Station> stations;
     Button favouriteButton;
     RouteAdapter adapter;
+    RecyclerView recyclerView;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,16 +55,29 @@ public class JourneySearchFragment extends Fragment {
         station1Search = view.findViewById(R.id.station1SearchView);
         station2Search = view.findViewById(R.id.station2SearchView);
         favouriteButton = view.findViewById(R.id.favouriteButton);
+        searchButton = view.findViewById(R.id.searchButton);
 
-        RecyclerView recyclerView;
         RecyclerView.LayoutManager layoutManager;
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
-
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new RouteAdapter(stations);
-        recyclerView.setAdapter(adapter);
+
+        searchButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                RouteSetup route = new RouteSetup();
+                PathCalculation p = new PathCalculation(route.chesterRoute[9], route.southPortRoute[22]);
+                Station[] routeArray = p.findRoute();
+
+                ArrayList<Station> routeArrayList = new ArrayList<>(Arrays.asList(routeArray));
+                System.out.println(routeArrayList);
+
+                adapter = new RouteAdapter(routeArrayList);
+                recyclerView.setAdapter(adapter);
+
+            }
+        });
 
         favouriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -73,14 +87,8 @@ public class JourneySearchFragment extends Fragment {
                 if (favourites == null) {
                     favourites = new ArrayList<>();
                 }
-                // Cannot add a duplicate favourite.
-                if (favourites.contains(new Favourite(R.drawable.ic_baseline_stars_24, station1Search.getText().toString(), station2Search.getText().toString()))) {
-                    // Cannot add a favourite including the prompt text.
-                    if (!station1Search.getText().toString().equals("\uD83D\uDD0E From") && !station2Search.getText().toString().equals("\uD83D\uDD0E To")) {
-                        favourites.add(new Favourite(R.drawable.ic_baseline_stars_24, station1Search.getText().toString(), station2Search.getText().toString()));
-                        PrefConfig.writeListInPref(getActivity(), favourites);
-                    }
-                }
+                favourites.add(new Favourite(R.drawable.ic_baseline_stars_24, station1Search.getText().toString(), station2Search.getText().toString()));
+                PrefConfig.writeListInPref(getActivity(), favourites);
             }
         });
 

@@ -8,12 +8,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp">
+        >
 
         <View
             android:id="@+id/view"
             android:layout_width="10dp"
-            android:layout_height="50dp"
+            android:layout_height="60dp"
             android:background="@color/black"
             app:layout_constraintBottom_toBottomOf="@+id/imageView"
             app:layout_constraintEnd_toEndOf="@+id/imageView"
@@ -34,8 +34,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
             android:text="Station Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             android:textColor="@color/black"
             android:textSize="20sp"
             android:textStyle="bold"
@@ -44,16 +44,18 @@
 
         <TextView
             android:id="@+id/changeNotify"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="24dp"
-            android:text="Change Here"
-            android:textColor="@color/black"
+            android:layout_marginStart="26dp"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+            android:textColor="@color/selected"
             android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintStart_toEndOf="@+id/view"
+            app:layout_constraintTop_toBottomOf="@+id/stationName"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,10 +1,8 @@
 package com.example.merseytrainslive;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,8 +22,8 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
 
         public RouteViewHolder(View itemView) {
             super(itemView);
-            stationName = itemView.findViewById(R.id.line1);
-            changeNotify = itemView.findViewById(R.id.line2);
+            stationName = itemView.findViewById(R.id.stationName);
+            changeNotify = itemView.findViewById(R.id.changeNotify);
         }
 
     }
@@ -44,9 +42,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
     @Override
     public void onBindViewHolder(RouteViewHolder holder, int position) {
         Station currentStation = stationList.get(position);
-
         holder.stationName.setText(currentStation.getStationName());
-
         if (stationList.get(position) == stationList.get(stationList.size()-1)) {
             holder.changeNotify.setText(changeText);
         }
@@ -55,7 +51,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
 
     @Override
     public int getItemCount() {
-        return 0;
+        return stationList.size();
     }
 
 }
