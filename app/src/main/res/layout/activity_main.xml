@@ -27,7 +27,7 @@
             android:background="@drawable/button_background_selector"
             android:enabled="false"
             android:onClick="timetableTabClick"
-            android:text="@string/timetables"
+            android:text="Search"
             android:textColor="@drawable/button_text_color"
             android:textSize="12sp"
             app:backgroundTint="@null" />
@@ -67,5 +67,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tabLayout"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

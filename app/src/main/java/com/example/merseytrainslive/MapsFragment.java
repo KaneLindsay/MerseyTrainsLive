@@ -1,25 +1,21 @@
 package com.example.merseytrainslive;
 
-import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentManager;
-
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
-import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -27,30 +23,22 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptor;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
-import com.google.android.gms.maps.model.Circle;
-import com.google.android.gms.maps.model.CircleOptions;
-import com.google.android.gms.maps.model.GroundOverlay;
 import com.google.android.gms.maps.model.GroundOverlayOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.Marker;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.android.gms.maps.model.TileOverlay;
-import com.google.android.gms.maps.model.TileOverlayOptions;
-import com.google.android.gms.maps.model.TileProvider;
-import com.google.android.gms.maps.model.UrlTileProvider;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import org.jetbrains.annotations.NotNull;
 
-public class MapsFragment extends Fragment implements OnMapReadyCallback {
+
+public class MapsFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     public MapsFragment() {
 
     }
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -67,16 +55,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
             mapFragment = SupportMapFragment.newInstance();
             fm.beginTransaction().replace(R.id.map, mapFragment).commit();
         }
+
         mapFragment.getMapAsync(this);  //starts map download - asynchronous
 
-
-
     }
+
 
     /**
      * Manipulates the map once available.
      */
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public void onMapReady(GoogleMap googleMap) {   //handle markers on map in here
 
@@ -84,6 +71,8 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         //edit bound_image stuff + the stuff in .position to size the image to fit the screen
         //can also edit the image bounds to make it able to pan/zoom more
         //###################################################################################
+
+        googleMap.setOnMarkerClickListener(this);
 
         //set bounds for the pan
         final LatLng BOUND_CORNER_NW = new LatLng(56.9, -23.5); //53.66, -3.293706
@@ -166,4 +155,12 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback {
         return BitmapDescriptorFactory.fromBitmap(bitmap);
     }
 
+
+    @Override
+    public boolean onMarkerClick(@NotNull Marker marker) {
+        FragmentTransaction map = getFragmentManager().beginTransaction();
+        BottomSheetDialog newFragment = BottomSheetDialog.newInstance(marker.getTitle());
+        newFragment.show(map, "dialog");
+        return false;
+    }
 }

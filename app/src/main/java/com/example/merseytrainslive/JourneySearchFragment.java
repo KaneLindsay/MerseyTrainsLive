@@ -55,11 +55,18 @@ public class JourneySearchFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 ArrayList<Favourite> favourites = PrefConfig.readListFromPref(getActivity());
+                // Create a new ArrayList to add to if there are no favourites already.
                 if (favourites == null) {
                     favourites = new ArrayList<>();
                 }
-                favourites.add(new Favourite(R.drawable.ic_baseline_stars_24, station1Search.getText().toString(), station2Search.getText().toString()));
-                PrefConfig.writeListInPref(getActivity(), favourites);
+                // Cannot add a duplicate favourite.
+                if (favourites.contains(new Favourite(R.drawable.ic_baseline_stars_24, station1Search.getText().toString(), station2Search.getText().toString()))) {
+                    // Cannot add a favourite including the prompt text.
+                    if (!station1Search.getText().toString().equals("\uD83D\uDD0E From") && !station2Search.getText().toString().equals("\uD83D\uDD0E To")) {
+                        favourites.add(new Favourite(R.drawable.ic_baseline_stars_24, station1Search.getText().toString(), station2Search.getText().toString()));
+                        PrefConfig.writeListInPref(getActivity(), favourites);
+                    }
+                }
             }
         });
 
@@ -81,6 +88,7 @@ public class JourneySearchFragment extends Fragment {
             }
         });
 
+        // Display search dialog on clicking a search bar.
         station1Search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
