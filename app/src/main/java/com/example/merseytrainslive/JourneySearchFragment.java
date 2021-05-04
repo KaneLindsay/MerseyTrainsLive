@@ -6,6 +6,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -30,8 +32,10 @@ public class JourneySearchFragment extends Fragment {
     Button departingButton;
     Button arrivingButton;
     Dialog dialog;
-    List<String> stations;
+    List<String> stationNames;
+    ArrayList<Station> stations;
     Button favouriteButton;
+    RouteAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -42,7 +46,7 @@ public class JourneySearchFragment extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
 
-        stations = Arrays.asList("Aigburth", "Ainsdale", "Aintree", "Bank Hall", "Bebington", "Bidston", "Birkdale", "Birkenhead Central", "Birkenhead Hamilton Square", "Birkenhead North", "Birkenhead Park", "Blundellsands & Crosby", "Bootle New Strand", "Bootle Oriel Road", "Bromborough", "Bromborough Rake", "Brunswick", "Conway Park", "Cressington", "Eastham Rake", "Fazakerley", "Formby", "Freshfield", "Green Lane", "Hall Road", "Hightown", "Hillside", "Hoylake", "Hunts Cross", "Kirkby", "Kirkdale", "Leasowe", "Liverpool Central", "Liverpool James Street", "Liverpool South Parkway", "Maghull", "Maghull North", "Manor Road", "Meols", "Moorfields", "Moreton", "New Brighton", "Old Road", "Orrell Park", "Port Sunlight", "Rice Lane", "Rock Ferry", "Sandhills", "Seaforth & Litherland", "Southport", "Spital", "St Michaels", "Wallasey Grove Road", "Wallasey Village", "Walton", "Waterloo", "West Kirkby");
+        stationNames = Arrays.asList("Aigburth", "Ainsdale", "Aintree", "Bank Hall", "Bebington", "Bidston", "Birkdale", "Birkenhead Central", "Birkenhead Hamilton Square", "Birkenhead North", "Birkenhead Park", "Blundellsands & Crosby", "Bootle New Strand", "Bootle Oriel Road", "Bromborough", "Bromborough Rake", "Brunswick", "Conway Park", "Cressington", "Eastham Rake", "Fazakerley", "Formby", "Freshfield", "Green Lane", "Hall Road", "Hightown", "Hillside", "Hoylake", "Hunts Cross", "Kirkby", "Kirkdale", "Leasowe", "Liverpool Central", "Liverpool James Street", "Liverpool South Parkway", "Maghull", "Maghull North", "Manor Road", "Meols", "Moorfields", "Moreton", "New Brighton", "Old Road", "Orrell Park", "Port Sunlight", "Rice Lane", "Rock Ferry", "Sandhills", "Seaforth & Litherland", "Southport", "Spital", "St Michaels", "Wallasey Grove Road", "Wallasey Village", "Walton", "Waterloo", "West Kirkby");
 
         // Setup any handles to view objects here
         departingButton = view.findViewById(R.id.departingButton);
@@ -50,6 +54,16 @@ public class JourneySearchFragment extends Fragment {
         station1Search = view.findViewById(R.id.station1SearchView);
         station2Search = view.findViewById(R.id.station2SearchView);
         favouriteButton = view.findViewById(R.id.favouriteButton);
+
+        RecyclerView recyclerView;
+        RecyclerView.LayoutManager layoutManager;
+        recyclerView = view.findViewById(R.id.recyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new RouteAdapter(stations);
+        recyclerView.setAdapter(adapter);
 
         favouriteButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,7 +115,7 @@ public class JourneySearchFragment extends Fragment {
                 EditText editText = dialog.findViewById(R.id.edit_text);
                 ListView listView = dialog.findViewById(R.id.list_view);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, stations);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, stationNames);
 
                 listView.setAdapter(adapter);
 
@@ -144,7 +158,7 @@ public class JourneySearchFragment extends Fragment {
                 EditText editText = dialog.findViewById(R.id.edit_text);
                 ListView listView = dialog.findViewById(R.id.list_view);
 
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, stations);
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, stationNames);
 
                 listView.setAdapter(adapter);
 

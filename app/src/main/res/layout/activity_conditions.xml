@@ -56,7 +56,7 @@
                 android:gravity="center_horizontal"
                 android:isScrollContainer="true"
                 android:scrollbars="vertical"
-                android:text="@string/terms_conditions" />
+                android:text="@string/conditions" />
 
             <LinearLayout
                 android:layout_width="match_parent"
