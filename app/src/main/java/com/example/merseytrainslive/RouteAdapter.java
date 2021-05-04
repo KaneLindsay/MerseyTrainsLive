@@ -14,6 +14,7 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
 
     private ArrayList<Station> stationList;
     String changeText = "Change Here";
+    Station changeStation;
 
     public static class RouteViewHolder extends RecyclerView.ViewHolder {
 
@@ -28,8 +29,9 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
 
     }
 
-    public RouteAdapter(ArrayList<Station> stationList) {
+    public RouteAdapter(ArrayList<Station> stationList, Station changeStation) {
         this.stationList = stationList;
+        this.changeStation = changeStation;
     }
 
     @NotNull
@@ -43,10 +45,9 @@ public class RouteAdapter extends RecyclerView.Adapter<RouteAdapter.RouteViewHol
     public void onBindViewHolder(RouteViewHolder holder, int position) {
         Station currentStation = stationList.get(position);
         holder.stationName.setText(currentStation.getStationName());
-        if (stationList.get(position) == stationList.get(stationList.size()-1)) {
+        if (stationList.get(position).getStanox() == changeStation.getStanox()) {
             holder.changeNotify.setText(changeText);
         }
-
     }
 
     @Override

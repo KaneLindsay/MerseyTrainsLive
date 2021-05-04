@@ -67,15 +67,39 @@ public class JourneySearchFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 RouteSetup route = new RouteSetup();
-                PathCalculation p = new PathCalculation(route.chesterRoute[9], route.southPortRoute[22]);
-                Station[] routeArray = p.findRoute();
+                Station searchStation1 = null;
+                Station searchStation2 = null;
 
-                ArrayList<Station> routeArrayList = new ArrayList<>(Arrays.asList(routeArray));
-                System.out.println(routeArrayList);
+                Station [][] routeArray = route.getRoutes();
+                for (int x = 0; x < 7; x++){
+                    for(int y=0; y < routeArray[x].length; y++){
+                        if(routeArray[x][y].getStationName() == station1Search.getText()) {
+                            searchStation1 = routeArray[x][y];
+                            break;
+                        }
+                    }
+                }
 
-                adapter = new RouteAdapter(routeArrayList);
-                recyclerView.setAdapter(adapter);
+                for (int x = 0; x < 7; x++){
+                    for(int y=0; y < routeArray[x].length; y++){
+                        if(routeArray[x][y].getStationName() == station2Search.getText()) {
+                            searchStation2 = routeArray[x][y];
+                            break;
+                        }
+                    }
+                }
 
+                if (!(searchStation1 == null || searchStation2 == null)) {
+                    PathCalculation p = new PathCalculation(searchStation1, searchStation2);
+                    Station[] bestRoute = p.findRoute();
+                    ArrayList<Station> routeArrayList = new ArrayList<>(Arrays.asList(bestRoute));
+                    Station changePoint = routeArrayList.get(routeArrayList.size()-1);
+                    routeArrayList.remove(routeArrayList.size()-1);
+
+                    recyclerView.removeAllViews();
+                    adapter = new RouteAdapter(routeArrayList, changePoint);
+                    recyclerView.setAdapter(adapter);
+                }
             }
         });
 

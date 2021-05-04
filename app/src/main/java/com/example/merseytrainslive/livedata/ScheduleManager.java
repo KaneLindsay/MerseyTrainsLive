@@ -18,9 +18,6 @@ import org.apache.commons.io.FileUtils;
 import java.sql.*;
 import java.util.ArrayList;
 
-
-
-
 public class ScheduleManager {
 
     public static void main(String[] args) throws IOException {
@@ -107,7 +104,7 @@ public class ScheduleManager {
 
             }
             //JSONObject o = new JSONObject(fis.toString());
-        } catch (IOException e) {
+        } catch (IOException | JSONException e) {
             System.err.printf("IOException : %s", e);
         }
     }
