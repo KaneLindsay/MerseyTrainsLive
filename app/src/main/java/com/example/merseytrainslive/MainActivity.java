@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetDialog
     TextView station2Search;
     JourneySearchFragment journeySearchFragment = new JourneySearchFragment();
     FavouritesFragment favouritesFragment = new FavouritesFragment();
-    MapsActivity mapsActivity = new MapsActivity();
+    MapsFragment mapsFragment = new MapsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetDialog
         v.setEnabled(false);
         b.setEnabled(true);
         c.setEnabled(true);
-        changeFragment(mapsActivity);
+        changeFragment(mapsFragment);
     }
 
     public void favouritesTabClick(View v) {
