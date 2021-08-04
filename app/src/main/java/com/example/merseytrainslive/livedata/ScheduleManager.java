@@ -1,4 +1,4 @@
-package JDBC;
+package com.example.merseytrainslive.livedata;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,7 +20,7 @@ import java.util.ArrayList;
 
 public class ScheduleManager {
 
-    public static void main(String[] args) throws IOException {
+    public ScheduleManager() throws IOException {
         Path source = Paths.get("G:/MerseyRail API testing/merseyRailFullDaily.gz");
         Path target = Paths.get("G:/MerseyRail API testing/merseyRailFullDaily");
 

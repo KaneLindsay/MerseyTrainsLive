@@ -18,6 +18,7 @@ class Consumer {
 
 
     private void consume(TrainManager manager) {
+        System.out.println("Hi");
         while (true) {
             try {
                 client = new Client(server, port, login, passcode, vhost);

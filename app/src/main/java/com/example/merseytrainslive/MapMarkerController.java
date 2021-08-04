@@ -18,9 +18,9 @@ import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapMarkerController {
-    public String[] stationName = {"James Street", "Lime Street", "MoorFields", "Central",
+    public String[] stationName = {"James Street", "Lime Street", "Moorfields", "Liverpool Central",
             //sandhills and up
-            "Sandhills", "BankHall", "Bootle Oriel Road", "Bootle New Strand", "Seaforth & LitherLand", "Waterloo", "Blundellsands & Crosby", "HallRoad",
+            "Sandhills", "Bank Hall", "Bootle Oriel Road", "Bootle New Strand", "Seaforth & LitherLand", "Waterloo", "Blundellsands & Crosby", "Hall Road",
             "Hightown", "Formby", "Freshfield", "Ainsdale", "Hillside", "Birkdale", "Southport",
             //brunswick and below
             "Brunswick", "St. Michaels", "Aigburth",  "Cressington", "Liverpool South Parkway", "Hunts Cross",

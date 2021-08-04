@@ -9,13 +9,15 @@ import androidx.appcompat.app.AppCompatDelegate;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.io.IOException;
+
 public class MainActivity extends AppCompatActivity implements BottomSheetDialog.BottomSheetListener {
 
     TextView station1Search;
     TextView station2Search;
     JourneySearchFragment journeySearchFragment = new JourneySearchFragment();
     FavouritesFragment favouritesFragment = new FavouritesFragment();
-    MapsActivity mapsActivity = new MapsActivity();
+    MapsFragment mapsActivity = new MapsFragment();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class MainActivity extends AppCompatActivity implements BottomSheetDialog
 
         station1Search = findViewById(R.id.station1SearchView);
         station2Search = findViewById(R.id.station2SearchView);
+
 
     }
 

@@ -1,17 +1,14 @@
 package com.example.merseytrainslive;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -158,8 +155,15 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
 
     @Override
     public boolean onMarkerClick(@NotNull Marker marker) {
+        //Station station = new Station("","",2,"");
+        StationManager manager = new StationManager();
+
+
+        String tiploc = manager.getTipLoc(marker.getTitle());
+
+
         FragmentTransaction map = getFragmentManager().beginTransaction();
-        BottomSheetDialog newFragment = BottomSheetDialog.newInstance(marker.getTitle());
+        BottomSheetDialog newFragment = BottomSheetDialog.newInstance(tiploc);
         newFragment.show(map, "dialog");
         return false;
     }

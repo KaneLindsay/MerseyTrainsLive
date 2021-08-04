@@ -5,7 +5,7 @@ import java.util.Vector;
 public class TrainManager {
     private Vector<Service> services;
 
-    public static void main(String[] args) {
+    public TrainManager () {
         TrainManager manager = new TrainManager();
         Consumer movementsHandler = new Consumer(manager);
     }

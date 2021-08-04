@@ -39,7 +39,7 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'org.java-websocket:Java-WebSocket:1.5.1'
     implementation 'com.google.code.gson:gson:2.8.6'
-    implementation files('C:/Users/kanel/AndroidStudioProjects/MerseyTrainsLive/Gozirra/Gozirra/gozirra-robomq.jar')
+    implementation files('C:/Users/WoW_w/OneDrive/Documents/GitHub/Gozirra/gozirra-robomq.jar')
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
