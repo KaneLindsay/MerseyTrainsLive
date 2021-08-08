@@ -28,6 +28,9 @@ import com.google.android.gms.maps.model.Polyline;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 
 public class MapsFragment extends Fragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -157,10 +160,18 @@ public class MapsFragment extends Fragment implements OnMapReadyCallback, Google
     public boolean onMarkerClick(@NotNull Marker marker) {
         //Station station = new Station("","",2,"");
         StationManager manager = new StationManager();
-
+        ArrayList<String[]> data = null;
 
         String tiploc = manager.getTipLoc(marker.getTitle());
+        try {
+            System.out.println("you");
+            data = manager.getClosestTrain(tiploc, 1, "0");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+
+        //System.out.println(data.get(1));
 
         FragmentTransaction map = getFragmentManager().beginTransaction();
         BottomSheetDialog newFragment = BottomSheetDialog.newInstance(tiploc);

@@ -1,6 +1,14 @@
 package com.example.merseytrainslive;
 
+import com.example.merseytrainslive.livedata.ScheduleManager;
+
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 
 public class StationManager {
     static Station[] allStations = new Station[66];
@@ -86,8 +94,7 @@ public class StationManager {
 
 
         for (int i = 0; i<allStations.length; i++){
-            System.out.println(stationName);
-            System.out.println(allStations[i].getStationName());
+
 
             String searchStation = allStations[i].getStationName();
             if (searchStation.equals(stationName)) {
@@ -266,4 +273,20 @@ public class StationManager {
            // currentIndex += i.length - 1;
         //}
     }
+
+
+
+    public static ArrayList<String[]> getClosestTrain (String tiploc, int platform, String time) throws IOException { ///finds the train with the
+        ScheduleManager schedule = new ScheduleManager();
+        ArrayList<String[]> data = schedule.getStationSchedule(tiploc, platform);
+        if(time == "0"){ //set to 0 to find current time
+            time = new SimpleDateFormat("HHmm", Locale.getDefault()).format(new Date());
+        }
+        return data;
+    }
+
+    //give it route list
+
+
+
 }

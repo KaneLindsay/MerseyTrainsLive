@@ -134,7 +134,7 @@ public class ScheduleManager {
         }
     }
 
-    public static ArrayList<String[]> getStationSchedule(String tiploc, int platform) {
+    public static ArrayList<String[]> getStationSchedule(String tiploc, int platform) { //enter platform as 0 if you want the whole station schedule
         ArrayList<String[]> data = new ArrayList<>();
 
         String url= "jdbc:mysql://localhost:3306/Train_Schedule";
@@ -143,10 +143,12 @@ public class ScheduleManager {
         String query = "SELECT train_uid, arrival, departure, platform FROM Train_Schedule WHERE tiploc = '" + tiploc + "' AND platform = " + platform + " ORDER BY arrival";
 
         try {
+
             Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } try {
+            //System.out.println("hi there");
             Connection con = DriverManager.getConnection(url, uname, password);
             Statement statement= con.createStatement();
             ResultSet result  = statement.executeQuery(query);
@@ -167,8 +169,7 @@ public class ScheduleManager {
         for (String[] x : data) {
             System.out.printf("%s, %s, %s, %s\n", x[0], x[1], x[2], x[3]);
         }
-
-
+        //System.out.println(data.get(1));
         return data;
     }
 
